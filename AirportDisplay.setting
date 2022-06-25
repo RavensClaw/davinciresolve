@@ -1,0 +1,180 @@
+{
+	Tools = ordered() {
+		Shape3D1 = Shape3D {
+			Inputs = {
+				["Transform3DOp.Rotate.X"] = Input {
+					SourceOp = "Shape3D1XRotation",
+					Source = "Value",
+				},
+				["Transform3DOp.Rotate.Y"] = Input { Value = 13, },
+				["Transform3DOp.ScaleLock"] = Input { Value = 0, },
+				["Transform3DOp.Scale.X"] = Input { Value = 1.536, },
+				MaterialInput = Input {
+					SourceOp = "Merge1",
+					Source = "Output",
+				},
+				["MtlStdInputs.MaterialID"] = Input { Value = 1, },
+				["SurfacePlaneInputs.ObjectID.ObjectID"] = Input { Value = 1, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 550, 115.5 } },
+		},
+		Shape3D1XRotation = BezierSpline {
+			SplineColor = { Red = 255, Green = 128, Blue = 128 },
+			CtrlWZoom = false,
+			NameSet = true,
+			KeyFrames = {
+				[0] = { 90, RH = { 6.66666666666667, 90 } },
+				[20] = { 0, LH = { 13.3333333333333, 0 } }
+			}
+		},
+		Renderer3D1 = Renderer3D {
+			CustomData = { ToolVersion = 2, },
+			Inputs = {
+				GlobalOut = Input { Value = 519, },
+				Width = Input { Value = 1920, },
+				Height = Input { Value = 1080, },
+				UseFrameFormatSettings = Input { Value = 1, },
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				SceneInput = Input {
+					SourceOp = "Shape3D1",
+					Source = "Output",
+				},
+			},
+			ViewInfo = OperatorInfo { Pos = { 660, 115.5 } },
+		},
+		Background1 = Background {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle1",
+					Source = "Mask",
+				},
+				GlobalOut = Input { Value = 519, },
+				Width = Input { Value = 1920, },
+				Height = Input { Value = 1080, },
+				UseFrameFormatSettings = Input { Value = 1, },
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+			},
+			ViewInfo = OperatorInfo { Pos = { 330, 49.5 } },
+		},
+		Text1 = TextPlus {
+			Inputs = {
+				GlobalOut = Input { Value = 519, },
+				Width = Input { Value = 1920, },
+				Height = Input { Value = 1080, },
+				UseFrameFormatSettings = Input { Value = 1, },
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				StyledText = Input { Value = "INPUT", },
+				Font = Input { Value = "Open Sans", },
+				Style = Input { Value = "Extrabold", },
+				Size = Input { Value = 0.063, },
+				VerticalJustificationNew = Input { Value = 3, },
+				HorizontalJustificationNew = Input { Value = 3, },
+			},
+			ViewInfo = OperatorInfo { Pos = { 220, 115.5 } },
+		},
+		Merge1 = Merge {
+			Inputs = {
+				Background = Input {
+					SourceOp = "Background1",
+					Source = "Output",
+				},
+				Foreground = Input {
+					SourceOp = "Text1",
+					Source = "Output",
+				},
+				PerformDepthMerge = Input { Value = 0, },
+			},
+			ViewInfo = OperatorInfo { Pos = { 440, 115.5 } },
+		},
+		Rectangle1 = RectangleMask {
+			Inputs = {
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				UseFrameFormatSettings = Input { Value = 1, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Width = Input { Value = 0.181, },
+				Height = Input { Value = 0.102, },
+				CornerRadius = Input { Value = 0.118, },
+			},
+			ViewInfo = OperatorInfo { Pos = { 220, 49.5 } },
+		},
+		DropShadow1 = ofx.com.blackmagicdesign.resolvefx.DropShadow {
+			Inputs = {
+				Source = Input {
+					SourceOp = "Renderer3D1",
+					Source = "Output",
+				},
+				shadowStrength = Input { Value = 0.5, },
+				shadowAngle = Input { Value = 37.5, },
+				ShadowDistance = Input { Value = 0.0500000007450581, },
+				shadowBlur = Input { Value = 0.550000011920929, },
+				shadowColorRed = Input { Value = 0, },
+				shadowColorGreen = Input { Value = 0, },
+				shadowColorBlue = Input { Value = 0, },
+				isLegacyComp = Input { Value = 0, },
+				blendGroup = Input { Value = 0, },
+				blendIn = Input { Value = 1, },
+				blend = Input { Value = 0, },
+				ignoreContentShape = Input { Value = 0, },
+				legacyIsProcessRGBOnly = Input { Value = 0, },
+				refreshTrigger = Input { Value = 1, },
+				resolvefxVersion = Input { Value = "1.1", },
+			},
+			ViewInfo = OperatorInfo { Pos = { 770, 115.5 } },
+		},
+		Transform1 = ofx.com.blackmagicdesign.resolvefx.Transform {
+			CtrlWZoom = false,
+			Inputs = {
+				Source = Input {
+					SourceOp = "DropShadow1",
+					Source = "Output",
+				},
+				controlMode = Input { Value = FuID { "TransformControlsSliders" }, },
+				controlGroup = Input { Value = 1, },
+				serializedWarpable = Input {
+					Value = Text {
+					},
+				},
+				serializedPinnable = Input {
+					Value = Text {
+					},
+				},
+				controlReset = Input { Value = 0, },
+				posX = Input { Value = 0, },
+				posY = Input { Value = 0, },
+				zoom = Input { Value = 0.781, },
+				rotate = Input { Value = 0, },
+				flipH = Input { Value = 0, },
+				flipV = Input { Value = 0, },
+				scaleX = Input { Value = 1, },
+				scaleY = Input { Value = 1, },
+				pitch = Input { Value = 0, },
+				yaw = Input { Value = 0, },
+				advancedGroup = Input { Value = 1, },
+				motionBlur = Input { Value = 0, },
+				isCrop = Input { Value = 0, },
+				cropL = Input { Value = 0, },
+				cropR = Input { Value = 0, },
+				cropT = Input { Value = 0, },
+				cropB = Input { Value = 0, },
+				edgeBehaviour = Input { Value = FuID { "Constant" }, },
+				edgeSoftness = Input { Value = 0, },
+				edgeRounding = Input { Value = 0, },
+				previewAlpha = Input { Value = 0, },
+				isLegacyCrop = Input { Value = 0, },
+				isLegacyAlphaHandling = Input { Value = 0, },
+				blendGroup = Input { Value = 0, },
+				blendIn = Input { Value = 1, },
+				blend = Input { Value = 0, },
+				ignoreContentShape = Input { Value = 0, },
+				legacyIsProcessRGBOnly = Input { Value = 0, },
+				refreshTrigger = Input { Value = 1, },
+				resolvefxVersion = Input { Value = "1.2", },
+			},
+			ViewInfo = OperatorInfo { Pos = { 880, 115.5 } },
+		}
+	},
+	ActiveTool = "Transform1"
+}

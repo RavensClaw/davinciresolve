@@ -1,0 +1,155 @@
+{
+	Tools = ordered() {
+		BSpline1 = BSplineMask {
+			DrawMode = "ModifyOnly",
+			DrawMode2 = "InsertAndModify",
+			Inputs = {
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				BorderWidth = Input {
+					SourceOp = "BSpline1BorderWidth",
+					Source = "Value",
+				},
+				WriteLength = Input {
+					SourceOp = "BSpline1Length",
+					Source = "Value",
+				},
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				UseFrameFormatSettings = Input { Value = 1, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.507604562737643, 0.533783783783784 }, },
+				ZRotation = Input { Value = -16.9686777421609, },
+				Polyline = Input {
+					SourceOp = "BSpline1Polyline",
+					Source = "Value",
+				},
+				Polyline2 = Input {
+					Value = BSplinePolyline {
+						Order = 4,
+						Type = "Tensioned",
+						Knots = { }
+					},
+					Disabled = true,
+				},
+				EffectMask = Input {
+					SourceOp = "BSpline2",
+					Source = "Mask",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 0, 49.5 } },
+		},
+		BSpline1BorderWidth = BezierSpline {
+			SplineColor = { Red = 16, Green = 35, Blue = 248 },
+			CtrlWZoom = false,
+			NameSet = true,
+			KeyFrames = {
+				[20] = { 0, RH = { 20.3333333333333, 0 } },
+				[21] = { 0.02, LH = { 20.6666666666667, 0.02 } }
+			}
+		},
+		BSpline1Length = BezierSpline {
+			SplineColor = { Red = 141, Green = 167, Blue = 243 },
+			CtrlWZoom = false,
+			NameSet = true,
+			KeyFrames = {
+				[21] = { 0, RH = { 24, 0 } },
+				[30] = { 1, LH = { 27, 1 } }
+			}
+		},
+		BSpline1Polyline = BezierSpline {
+			SplineColor = { Red = 96, Green = 255, Blue = 47 },
+			CtrlWZoom = false,
+			NameSet = true,
+			KeyFrames = {
+				[0] = { 0, Flags = { Linear = true, LockedY = true }, Value = BSplinePolyline {
+						Points = {
+							{ X = -0.0789162096159237, Y = 0.016239060473188 },
+							{ X = -0.189480354879594, Y = -0.0923423423423423 },
+							{ X = -0.0697901214665911, Y = -0.0887015397967156 }
+						},
+						Order = 4,
+						Type = "Tensioned",
+						Knots = { 0, 0, 0, 0, 1, 1, 1, 1 }
+					} }
+			}
+		},
+		BSpline2 = BSplineMask {
+			DrawMode = "ModifyOnly",
+			DrawMode2 = "InsertAndModify",
+			Inputs = {
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				BorderWidth = Input { Value = 0.02, },
+				WriteLength = Input {
+					SourceOp = "BSpline2Length",
+					Source = "Value",
+				},
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				UseFrameFormatSettings = Input { Value = 1, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.489860583016477, 0.506756756756757 }, },
+				Polyline = Input {
+					SourceOp = "BSpline2Polyline",
+					Source = "Value",
+				},
+				Polyline2 = Input {
+					Value = BSplinePolyline {
+						Order = 4,
+						Type = "Tensioned",
+						Knots = { }
+					},
+					Disabled = true,
+				},
+			},
+			ViewInfo = OperatorInfo { Pos = { 0, 115.5 } },
+		},
+		BSpline2Length = BezierSpline {
+			SplineColor = { Red = 141, Green = 167, Blue = 243 },
+			CtrlWZoom = false,
+			NameSet = true,
+			KeyFrames = {
+				[0] = { 0, RH = { 6.66666666666667, 0 } },
+				[20] = { 1, LH = { 13.3333333333333, 1 } }
+			}
+		},
+		BSpline2Polyline = BezierSpline {
+			SplineColor = { Red = 173, Green = 255, Blue = 47 },
+			CtrlWZoom = false,
+			NameSet = true,
+			KeyFrames = {
+				[0] = { 0, Flags = { Linear = true, LockedY = true }, Value = BSplinePolyline {
+						Points = {
+							{ X = 0.216096324461343, Y = -0.222972972972973 },
+							{ X = 0.166666666666667, Y = -0.0878378378378379 },
+							{ X = 0.11723700887199, Y = -0.027027027027027 },
+							{ X = 0.0424588086185045, Y = 0.0202702702702703 },
+							{ X = -0.0361216730038023, Y = 0.0247747747747747 },
+							{ X = -0.102027883396705, Y = 0.0337837837837838 },
+							{ X = -0.131178707224335, Y = 0.0337837837837839 }
+						},
+						Order = 4,
+						Type = "Tensioned",
+						Knots = { 0, 0, 0, 0, 1, 2, 3, 4, 4, 4, 4 }
+					} }
+			}
+		},
+		Background1 = Background {
+			CtrlWZoom = false,
+			Inputs = {
+				GlobalOut = Input { Value = 144, },
+				Width = Input { Value = 1920, },
+				Height = Input { Value = 1080, },
+				UseFrameFormatSettings = Input { Value = 1, },
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				EffectMask = Input {
+					SourceOp = "BSpline1",
+					Source = "Mask",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 110, 49.5 } },
+		}
+	},
+	ActiveTool = "Background1"
+}

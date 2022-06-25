@@ -1,0 +1,333 @@
+{
+	Tools = ordered() {
+		Ellipse1_2 = EllipseMask {
+			Inputs = {
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				BorderWidth = Input {
+					SourceOp = "Ellipse1_2BorderWidth",
+					Source = "Value",
+				},
+				Solid = Input { Value = 0, },
+				WriteLength = Input {
+					SourceOp = "Ellipse1_2Length",
+					Source = "Value",
+				},
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				UseFrameFormatSettings = Input { Value = 1, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.192708333333333, 0.47037037037037 }, },
+				Width = Input { Value = 0.04, },
+				Height = Input {
+					Value = 0.04,
+					Expression = "Width",
+				},
+				Angle = Input { Value = 31.3, },
+			},
+			ViewInfo = OperatorInfo { Pos = { 440, 82.5 } },
+		},
+		Ellipse1_2BorderWidth = BezierSpline {
+			SplineColor = { Red = 16, Green = 35, Blue = 248 },
+			NameSet = true,
+			KeyFrames = {
+				[15] = { 0, RH = { 15.3333333333333, 0 } },
+				[16] = { 0.0033, LH = { 15.6666666666667, 0.0033 } }
+			}
+		},
+		Ellipse1_2Length = BezierSpline {
+			SplineColor = { Red = 141, Green = 167, Blue = 243 },
+			CtrlWZoom = false,
+			NameSet = true,
+			KeyFrames = {
+				[16] = { 0, RH = { 17.6666666666667, 0 } },
+				[21] = { 0.85, LH = { 19.3333333333333, 0.85 } }
+			}
+		},
+		Ellipse1_1_1 = EllipseMask {
+			Inputs = {
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				BorderWidth = Input {
+					SourceOp = "Ellipse1_1_1BorderWidth",
+					Source = "Value",
+				},
+				Solid = Input { Value = 0, },
+				WriteLength = Input {
+					SourceOp = "Ellipse1_1_1Length",
+					Source = "Value",
+				},
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				UseFrameFormatSettings = Input { Value = 1, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.755208333333333, 0.466666666666666 }, },
+				Width = Input { Value = 0.04, },
+				Height = Input {
+					Value = 0.04,
+					Expression = "Width",
+				},
+				Angle = Input { Value = 198.3, },
+			},
+			ViewInfo = OperatorInfo { Pos = { 550, 16.5 } },
+		},
+		Ellipse1_1_1BorderWidth = BezierSpline {
+			SplineColor = { Red = 16, Green = 35, Blue = 248 },
+			NameSet = true,
+			KeyFrames = {
+				[50] = { 0, RH = { 50.3333333333333, 0 } },
+				[51] = { 0.0033, LH = { 50.6666666666667, 0.0033 } }
+			}
+		},
+		Ellipse1_1_1Length = BezierSpline {
+			SplineColor = { Red = 141, Green = 167, Blue = 243 },
+			CtrlWZoom = false,
+			NameSet = true,
+			KeyFrames = {
+				[51] = { 0, RH = { 52.6666666666667, 0 } },
+				[56] = { 0.85, LH = { 54.3333333333333, 0.85 } }
+			}
+		},
+		Merge3 = Merge {
+			Inputs = {
+				Background = Input {
+					SourceOp = "Background2",
+					Source = "Output",
+				},
+				Foreground = Input {
+					SourceOp = "Background2_1",
+					Source = "Output",
+				},
+				PerformDepthMerge = Input { Value = 0, },
+			},
+			ViewInfo = OperatorInfo { Pos = { 660, 82.5 } },
+		},
+		Background2_1 = Background {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Ellipse1_1_1",
+					Source = "Mask",
+				},
+				GlobalOut = Input { Value = 331, },
+				Width = Input { Value = 1920, },
+				Height = Input { Value = 1080, },
+				UseFrameFormatSettings = Input { Value = 1, },
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+			},
+			ViewInfo = OperatorInfo { Pos = { 660, 16.5 } },
+		},
+		Background2 = Background {
+			Inputs = {
+				GlobalOut = Input { Value = 331, },
+				Width = Input { Value = 1920, },
+				Height = Input { Value = 1080, },
+				UseFrameFormatSettings = Input { Value = 1, },
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				EffectMask = Input {
+					SourceOp = "Ellipse1_2",
+					Source = "Mask",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 550, 82.5 } },
+		},
+		Merge1 = Merge {
+			Inputs = {
+				Background = Input {
+					SourceOp = "Merge3",
+					Source = "Output",
+				},
+				Foreground = Input {
+					SourceOp = "Background1",
+					Source = "Output",
+				},
+				PerformDepthMerge = Input { Value = 0, },
+			},
+			ViewInfo = OperatorInfo { Pos = { 660, 148.5 } },
+		},
+		Background1 = Background {
+			Inputs = {
+				GlobalOut = Input { Value = 331, },
+				Width = Input { Value = 1920, },
+				Height = Input { Value = 1080, },
+				UseFrameFormatSettings = Input { Value = 1, },
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				TopLeftRed = Input { Value = 1, },
+				TopLeftGreen = Input { Value = 0.666666666666667, },
+				EffectMask = Input {
+					SourceOp = "Ellipse1_1",
+					Source = "Mask",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 550, 148.5 } },
+		},
+		DropShadow1 = ofx.com.blackmagicdesign.resolvefx.DropShadow {
+			CtrlWZoom = false,
+			Inputs = {
+				Source = Input {
+					SourceOp = "Merge1",
+					Source = "Output",
+				},
+				shadowStrength = Input { Value = 0.402, },
+				shadowAngle = Input { Value = 43, },
+				ShadowDistance = Input { Value = 0.0283, },
+				shadowBlur = Input { Value = 0.55, },
+				shadowColorRed = Input { Value = 0, },
+				shadowColorGreen = Input { Value = 0, },
+				shadowColorBlue = Input { Value = 0, },
+				isLegacyComp = Input { Value = 0, },
+				blendGroup = Input { Value = 0, },
+				blendIn = Input { Value = 1, },
+				blend = Input { Value = 0, },
+				ignoreContentShape = Input { Value = 0, },
+				legacyIsProcessRGBOnly = Input { Value = 0, },
+				refreshTrigger = Input { Value = 1, },
+				resolvefxVersion = Input { Value = "1.1", },
+			},
+			ViewInfo = OperatorInfo { Pos = { 770, 148.5 } },
+		},
+		Ellipse1_1 = EllipseMask {
+			Inputs = {
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				UseFrameFormatSettings = Input { Value = 1, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.755208333333333, 0.466666666666666 }, },
+				Width = Input {
+					SourceOp = "Ellipse1_1Width",
+					Source = "Value",
+				},
+				Height = Input {
+					Value = 0.027,
+					Expression = "Width",
+				},
+				EffectMask = Input {
+					SourceOp = "Ellipse1",
+					Source = "Mask",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 440, 148.5 } },
+		},
+		Ellipse1_1Width = BezierSpline {
+			SplineColor = { Red = 225, Green = 255, Blue = 0 },
+			CtrlWZoom = false,
+			NameSet = true,
+			KeyFrames = {
+				[35] = { 0, RH = { 38.3333333333333, 0 } },
+				[45] = { 0.042, LH = { 41.6670000553131, 0.0360006000995636 }, RH = { 46.6664999723434, 0.0449996999502182 } },
+				[50] = { 0.027, LH = { 48.3333333333333, 0.027 } }
+			}
+		},
+		BSpline1 = BSplineMask {
+			DrawMode = "ClickAppend",
+			DrawMode2 = "InsertAndModify",
+			Inputs = {
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				BorderWidth = Input {
+					SourceOp = "BSpline1BorderWidth",
+					Source = "Value",
+				},
+				WriteLength = Input {
+					SourceOp = "BSpline1Length",
+					Source = "Value",
+				},
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				UseFrameFormatSettings = Input { Value = 1, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Polyline = Input {
+					SourceOp = "BSpline1Polyline",
+					Source = "Value",
+				},
+				Polyline2 = Input {
+					Value = BSplinePolyline {
+						Order = 4,
+						Type = "Tensioned",
+						Knots = { }
+					},
+					Disabled = true,
+				},
+			},
+			ViewInfo = OperatorInfo { Pos = { 220, 148.5 } },
+		},
+		BSpline1BorderWidth = BezierSpline {
+			SplineColor = { Red = 16, Green = 35, Blue = 248 },
+			NameSet = true,
+			KeyFrames = {
+				[21] = { 0, RH = { 21.3333333333333, 0 } },
+				[22] = { 0.0102, LH = { 21.6666666666667, 0.0102 } }
+			}
+		},
+		BSpline1Length = BezierSpline {
+			SplineColor = { Red = 141, Green = 167, Blue = 243 },
+			NameSet = true,
+			KeyFrames = {
+				[22] = { 0, RH = { 26.3333333333333, 0 } },
+				[35] = { 1, LH = { 30.6666666666667, 1 } }
+			}
+		},
+		BSpline1Polyline = BezierSpline {
+			SplineColor = { Red = 173, Green = 255, Blue = 47 },
+			CtrlWZoom = false,
+			NameSet = true,
+			KeyFrames = {
+				[0] = { 0, Flags = { Linear = true, LockedY = true }, Value = BSplinePolyline {
+						Points = {
+							{ X = -0.301013941698352, Y = -0.0292792792792793 },
+							{ X = -0.0771308618504436, Y = -0.00530530530530532 },
+							{ X = 0.0751861533586819, Y = -0.00820820820820822 },
+							{ X = 0.240177439797212, Y = -0.0292792792792793 }
+						},
+						Order = 4,
+						Type = "Tensioned",
+						Knots = { 0, 0, 0, 0, 1, 1, 1, 1 }
+					} }
+			}
+		},
+		Ellipse1 = EllipseMask {
+			Inputs = {
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				UseFrameFormatSettings = Input { Value = 1, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.192708333333333, 0.47037037037037 }, },
+				Width = Input {
+					SourceOp = "Ellipse1Width",
+					Source = "Value",
+				},
+				Height = Input {
+					SourceOp = "Ellipse1Height",
+					Source = "Value",
+					Expression = "Width",
+				},
+				EffectMask = Input {
+					SourceOp = "BSpline1",
+					Source = "Mask",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 330, 148.5 } },
+		},
+		Ellipse1Width = BezierSpline {
+			SplineColor = { Red = 225, Green = 255, Blue = 0 },
+			NameSet = true,
+			KeyFrames = {
+				[0] = { 0, RH = { 3.33333333333333, 0.014 }, Flags = { Linear = true } },
+				[10] = { 0.042, LH = { 6.66666666666667, 0.028 }, RH = { 11.666492773175, 0.048999269647335 }, Flags = { Linear = true } },
+				[15] = { 0.027, LH = { 13.3333333333333, 0.027 } }
+			}
+		},
+		Ellipse1Height = BezierSpline {
+			SplineColor = { Red = 0, Green = 255, Blue = 255 },
+			CtrlWZoom = false,
+			NameSet = true,
+			KeyFrames = {
+				[10] = { 0, Flags = { Linear = true } }
+			}
+		}
+	},
+	ActiveTool = "DropShadow1"
+}

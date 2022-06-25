@@ -1,0 +1,154 @@
+{
+	Tools = ordered() {
+		MediaIn2 = MediaIn {
+			CustomData = { MediaProps = { MEDIA_NUM_LAYERS = 0, MEDIA_FORMAT_TYPE = "PNG", MEDIA_PAR = 1, MEDIA_LAYER_DESC = {
+					}, MEDIA_NAME = "BankMobileApp.png", MEDIA_PATH = "D:\\Jiten_Youtube\\API\\BankMobileApp.png", MEDIA_START_FRAME = 0, MEDIA_IS_SOURCE_RES = true, MEDIA_SRC_FRAME_RATE = 24, MEDIA_MARK_OUT = 0, MEDIA_WIDTH = 720, MEDIA_NUM_FRAMES = 1, MEDIA_MARK_IN = 0, MEDIA_HEIGHT = 1600 } },
+			Inputs = {
+				GlobalOut = Input { Value = 5255, },
+				MediaID = Input { Value = "1584c9b3-b055-4b44-97e4-916294781a61", },
+				AudioTrack = Input { Value = FuID { "Timeline Audio" }, },
+				Layer = Input {
+					Value = Text {
+					},
+				},
+				ClipTimeEnd = Input { Value = 0, },
+				HoldLastFrame = Input { Value = 5255, },
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+			},
+			ViewInfo = OperatorInfo { Pos = { 220, 82.5 } },
+		},
+		Transform1 = ofx.com.blackmagicdesign.resolvefx.Transform {
+			Inputs = {
+				Source = Input {
+					SourceOp = "MediaIn2",
+					Source = "Output",
+				},
+				controlMode = Input { Value = FuID { "TransformControlsSliders" }, },
+				controlGroup = Input { Value = 1, },
+				serializedWarpable = Input {
+					Value = Text {
+					},
+				},
+				serializedPinnable = Input {
+					Value = Text {
+					},
+				},
+				controlReset = Input { Value = 0, },
+				posX = Input { Value = -0.172, },
+				posY = Input { Value = 0, },
+				zoom = Input { Value = 0.516, },
+				rotate = Input { Value = 0, },
+				flipH = Input { Value = 0, },
+				flipV = Input { Value = 0, },
+				scaleX = Input { Value = 1, },
+				scaleY = Input { Value = 1, },
+				pitch = Input { Value = 0, },
+				yaw = Input { Value = 0, },
+				advancedGroup = Input { Value = 1, },
+				motionBlur = Input { Value = 0, },
+				isCrop = Input { Value = 0, },
+				cropL = Input { Value = 0, },
+				cropR = Input { Value = 0, },
+				cropT = Input { Value = 0, },
+				cropB = Input { Value = 0, },
+				edgeBehaviour = Input { Value = FuID { "Constant" }, },
+				edgeSoftness = Input { Value = 0, },
+				edgeRounding = Input { Value = 0, },
+				previewAlpha = Input { Value = 0, },
+				isLegacyCrop = Input { Value = 0, },
+				isLegacyAlphaHandling = Input { Value = 0, },
+				blendGroup = Input { Value = 0, },
+				blendIn = Input { Value = 1, },
+				blend = Input { Value = 0, },
+				ignoreContentShape = Input { Value = 0, },
+				legacyIsProcessRGBOnly = Input { Value = 0, },
+				refreshTrigger = Input { Value = 1, },
+				resolvefxVersion = Input { Value = "1.2", },
+			},
+			ViewInfo = OperatorInfo { Pos = { 440, 148.5 } },
+		},
+		Merge2 = Merge {
+			Inputs = {
+				Background = Input {
+					SourceOp = "Background1",
+					Source = "Output",
+				},
+				Foreground = Input {
+					SourceOp = "Transform1",
+					Source = "Output",
+				},
+				PerformDepthMerge = Input { Value = 0, },
+			},
+			ViewInfo = OperatorInfo { Pos = { 550, 148.5 } },
+		},
+		Background1 = Background {
+			Inputs = {
+				GlobalOut = Input { Value = 1219, },
+				Width = Input { Value = 1920, },
+				Height = Input { Value = 1080, },
+				UseFrameFormatSettings = Input { Value = 1, },
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				TopLeftAlpha = Input { Value = 0, },
+			},
+			ViewInfo = OperatorInfo { Pos = { 495, 49.5 } },
+		},
+		Shape3D1 = Shape3D {
+			Inputs = {
+				["Transform3DOp.Translate.X"] = Input { Value = 1.014, },
+				["Transform3DOp.Translate.Y"] = Input { Value = -0.029, },
+				["Transform3DOp.Rotate.Y"] = Input { Value = -10.4, },
+				["Transform3DOp.ScaleLock"] = Input { Value = 0, },
+				["Transform3DOp.Scale.X"] = Input { Value = 3.426, },
+				["Transform3DOp.Scale.Y"] = Input { Value = 1.89, },
+				MaterialInput = Input {
+					SourceOp = "Merge2",
+					Source = "Output",
+				},
+				["MtlStdInputs.MaterialID"] = Input { Value = 1, },
+				["SurfacePlaneInputs.ObjectID.ObjectID"] = Input { Value = 1, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 660, 148.5 } },
+		},
+		Renderer3D1 = Renderer3D {
+			CustomData = { ToolVersion = 2 },
+			Inputs = {
+				GlobalOut = Input { Value = 1219, },
+				Width = Input { Value = 1920, },
+				Height = Input { Value = 1080, },
+				UseFrameFormatSettings = Input { Value = 1, },
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				SceneInput = Input {
+					SourceOp = "Shape3D1",
+					Source = "Output",
+				},
+			},
+			ViewInfo = OperatorInfo { Pos = { 770, 148.5 } },
+		},
+		DropShadow1 = ofx.com.blackmagicdesign.resolvefx.DropShadow {
+			CtrlWZoom = false,
+			Inputs = {
+				Source = Input {
+					SourceOp = "Renderer3D1",
+					Source = "Output",
+				},
+				shadowStrength = Input { Value = 0.5, },
+				shadowAngle = Input { Value = 37.5, },
+				ShadowDistance = Input { Value = 0.0500000007450581, },
+				shadowBlur = Input { Value = 0.550000011920929, },
+				shadowColorRed = Input { Value = 0, },
+				shadowColorGreen = Input { Value = 0, },
+				shadowColorBlue = Input { Value = 0, },
+				isLegacyComp = Input { Value = 0, },
+				blendGroup = Input { Value = 0, },
+				blendIn = Input { Value = 1, },
+				blend = Input { Value = 0, },
+				ignoreContentShape = Input { Value = 0, },
+				legacyIsProcessRGBOnly = Input { Value = 0, },
+				refreshTrigger = Input { Value = 1, },
+				resolvefxVersion = Input { Value = "1.1", },
+			},
+			ViewInfo = OperatorInfo { Pos = { 880, 148.5 } },
+		}
+	},
+	ActiveTool = "DropShadow1"
+}

@@ -1,0 +1,324 @@
+{
+	Tools = ordered() {
+		MediaIn1 = MediaIn {
+			ExtentSet = true,
+			CustomData = { MediaProps = {
+					MEDIA_AUDIO_TRACKS_DESC = {
+						{
+							MEDIA_AUDIO_BIT_DEPTH = 32,
+							MEDIA_AUDIO_FRAME_RATE = 29.97002997003,
+							MEDIA_AUDIO_NUM_CHANNELS = 2,
+							MEDIA_AUDIO_SAMPLE_RATE = 48000,
+							MEDIA_AUDIO_START_TIME = 0,
+							MEDIA_AUDIO_TRACK_ID = "Timeline Audio",
+							MEDIA_AUDIO_TRACK_NAME = "Timeline Audio [Timeline 1]"
+						}
+					},
+					MEDIA_AUDIO_TRACKS_NUM = 1,
+					MEDIA_FORMAT_TYPE = "PNG",
+					MEDIA_HAS_AUDIO = true,
+					MEDIA_HEIGHT = 500,
+					MEDIA_IS_SOURCE_RES = true,
+					MEDIA_LAYER_DESC = {
+					},
+					MEDIA_MARK_IN = 0,
+					MEDIA_MARK_OUT = 9396,
+					MEDIA_NAME = "serverWhite-removebg-preview.png",
+					MEDIA_NUM_FRAMES = 9397,
+					MEDIA_NUM_LAYERS = 0,
+					MEDIA_PAR = 1,
+					MEDIA_PATH = "D:\\Jiten_Youtube\\ProxyServer\\serverWhite-removebg-preview.png",
+					MEDIA_SRC_FRAME_RATE = 29.97002997003,
+					MEDIA_START_FRAME = 0,
+					MEDIA_WIDTH = 500
+				} },
+			Inputs = {
+				GlobalOut = Input { Value = 9396, },
+				AudioTrack = Input { Value = FuID { "Timeline Audio" }, },
+				Layer = Input { Value = "0", },
+				ClipTimeEnd = Input { Value = 9396, },
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				LeftAudio = Input {
+					SourceOp = "Left",
+					Source = "Data",
+				},
+				RightAudio = Input {
+					SourceOp = "Right",
+					Source = "Data",
+				},
+			},
+			ViewInfo = OperatorInfo { Pos = { 55, 49.5 } },
+		},
+		Left = AudioDisplay {
+			CtrlWZoom = false,
+		},
+		Right = AudioDisplay {
+			CtrlWZoom = false,
+		},
+		Shape3D1 = Shape3D {
+			Inputs = {
+				["Transform3DOp.Translate.Y"] = Input { Value = 0.058, },
+				["Transform3DOp.Rotate.Y"] = Input { Value = 15.7, },
+				MaterialInput = Input {
+					SourceOp = "MediaIn1",
+					Source = "Output",
+				},
+				["MtlStdInputs.MaterialID"] = Input { Value = 1, },
+				["SurfacePlaneInputs.ObjectID.ObjectID"] = Input { Value = 1, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 165, 49.5 } },
+		},
+		Renderer3D1 = Renderer3D {
+			CustomData = { ToolVersion = 2 },
+			Inputs = {
+				GlobalOut = Input { Value = 9396, },
+				Width = Input { Value = 500, },
+				Height = Input { Value = 500, },
+				UseFrameFormatSettings = Input { Value = 1, },
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				SceneInput = Input {
+					SourceOp = "Shape3D1",
+					Source = "Output",
+				},
+			},
+			ViewInfo = OperatorInfo { Pos = { 275, 49.5 } },
+		},
+		Rectangle1 = RectangleMask {
+			Inputs = {
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 500, },
+				MaskHeight = Input { Value = 500, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				UseFrameFormatSettings = Input { Value = 1, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.5, 0.0608108108108111 }, },
+				Width = Input { Value = 1, },
+				Height = Input { Value = 0.118, },
+				CornerRadius = Input { Value = 0.197, },
+			},
+			ViewInfo = OperatorInfo { Pos = { 110, 82.5 } },
+		},
+		Background1 = Background {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle1",
+					Source = "Mask",
+				},
+				GlobalOut = Input { Value = 9396, },
+				Width = Input { Value = 500, },
+				Height = Input { Value = 500, },
+				UseFrameFormatSettings = Input { Value = 1, },
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+			},
+			ViewInfo = OperatorInfo { Pos = { 220, 82.5 } },
+		},
+		Text1 = TextPlus {
+			Inputs = {
+				GlobalOut = Input { Value = 9396, },
+				Width = Input { Value = 500, },
+				Height = Input { Value = 500, },
+				UseFrameFormatSettings = Input { Value = 1, },
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				Center = Input { Value = { 0.5, 0.135135135135135 }, },
+				StyledText = Input { Value = "CRACKLE.COM SERVER", },
+				Font = Input { Value = "Open Sans", },
+				Style = Input { Value = "Bold", },
+				Size = Input { Value = 0.1535, },
+				VerticalJustificationNew = Input { Value = 3, },
+				HorizontalJustificationNew = Input { Value = 3, },
+			},
+			ViewInfo = OperatorInfo { Pos = { 110, 115.5 } },
+		},
+		DropShadow1 = ofx.com.blackmagicdesign.resolvefx.DropShadow {
+			Inputs = {
+				Source = Input {
+					SourceOp = "Renderer3D1",
+					Source = "Output",
+				},
+				shadowStrength = Input { Value = 0.5, },
+				shadowAngle = Input { Value = 37.5, },
+				ShadowDistance = Input { Value = 0.0500000007450581, },
+				shadowBlur = Input { Value = 0.550000011920929, },
+				shadowColorRed = Input { Value = 0, },
+				shadowColorGreen = Input { Value = 0, },
+				shadowColorBlue = Input { Value = 0, },
+				isLegacyComp = Input { Value = 0, },
+				blendGroup = Input { Value = 0, },
+				blendIn = Input { Value = 1, },
+				blend = Input { Value = 0, },
+				ignoreContentShape = Input { Value = 0, },
+				legacyIsProcessRGBOnly = Input { Value = 0, },
+				refreshTrigger = Input { Value = 1, },
+				resolvefxVersion = Input { Value = "1.1", },
+			},
+			ViewInfo = OperatorInfo { Pos = { 385, 49.5 } },
+		},
+		Merge2 = Merge {
+			Inputs = {
+				Background = Input {
+					SourceOp = "Background1",
+					Source = "Output",
+				},
+				Foreground = Input {
+					SourceOp = "Text1",
+					Source = "Output",
+				},
+				Center = Input { Value = { 0.5, 0.427927927927928 }, },
+				PerformDepthMerge = Input { Value = 0, },
+			},
+			ViewInfo = OperatorInfo { Pos = { 220, 115.5 } },
+		},
+		Shape3D2 = Shape3D {
+			Inputs = {
+				["Transform3DOp.Rotate.X"] = Input { Value = -5.3, },
+				["Transform3DOp.Rotate.Y"] = Input { Value = 15.7, },
+				["Transform3DOp.Scale.X"] = Input { Value = 1.261, },
+				MaterialInput = Input {
+					SourceOp = "Merge2",
+					Source = "Output",
+				},
+				["MtlStdInputs.MaterialID"] = Input { Value = 2, },
+				["SurfacePlaneInputs.ObjectID.ObjectID"] = Input { Value = 2, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 330, 115.5 } },
+		},
+		Renderer3D2 = Renderer3D {
+			CustomData = { ToolVersion = 2 },
+			Inputs = {
+				GlobalOut = Input { Value = 9396, },
+				Width = Input { Value = 500, },
+				Height = Input { Value = 500, },
+				UseFrameFormatSettings = Input { Value = 1, },
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				SceneInput = Input {
+					SourceOp = "Shape3D2",
+					Source = "Output",
+				},
+			},
+			ViewInfo = OperatorInfo { Pos = { 440, 115.5 } },
+		},
+		DropShadow2 = ofx.com.blackmagicdesign.resolvefx.DropShadow {
+			Inputs = {
+				Source = Input {
+					SourceOp = "Renderer3D2",
+					Source = "Output",
+				},
+				shadowStrength = Input { Value = 0.5, },
+				shadowAngle = Input { Value = 37.5, },
+				ShadowDistance = Input { Value = 0.0500000007450581, },
+				shadowBlur = Input { Value = 0.550000011920929, },
+				shadowColorRed = Input { Value = 0, },
+				shadowColorGreen = Input { Value = 0, },
+				shadowColorBlue = Input { Value = 0, },
+				isLegacyComp = Input { Value = 0, },
+				blendGroup = Input { Value = 0, },
+				blendIn = Input { Value = 1, },
+				blend = Input { Value = 0, },
+				ignoreContentShape = Input { Value = 0, },
+				legacyIsProcessRGBOnly = Input { Value = 0, },
+				refreshTrigger = Input { Value = 1, },
+				resolvefxVersion = Input { Value = "1.1", },
+			},
+			ViewInfo = OperatorInfo { Pos = { 550, 115.5 } },
+		},
+		Background2 = Background {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Ellipse1",
+					Source = "Mask",
+				},
+				GlobalOut = Input { Value = 9396, },
+				Width = Input { Value = 500, },
+				Height = Input { Value = 500, },
+				UseFrameFormatSettings = Input { Value = 1, },
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				TopLeftRed = Input { Value = 1, },
+				TopLeftGreen = Input { Value = 0.333333333333333, },
+			},
+			ViewInfo = OperatorInfo { Pos = { 440, 181.5 } },
+		},
+		DropShadow3 = ofx.com.blackmagicdesign.resolvefx.DropShadow {
+			Inputs = {
+				Source = Input {
+					SourceOp = "Background2",
+					Source = "Output",
+				},
+				shadowStrength = Input { Value = 0.5, },
+				shadowAngle = Input { Value = 37.5, },
+				ShadowDistance = Input { Value = 0.0500000007450581, },
+				shadowBlur = Input { Value = 0.550000011920929, },
+				shadowColorRed = Input { Value = 0, },
+				shadowColorGreen = Input { Value = 0, },
+				shadowColorBlue = Input { Value = 0, },
+				isLegacyComp = Input { Value = 0, },
+				blendGroup = Input { Value = 0, },
+				blendIn = Input { Value = 1, },
+				blend = Input { Value = 0, },
+				ignoreContentShape = Input { Value = 0, },
+				legacyIsProcessRGBOnly = Input { Value = 0, },
+				refreshTrigger = Input { Value = 1, },
+				resolvefxVersion = Input { Value = "1.1", },
+			},
+			ViewInfo = OperatorInfo { Pos = { 550, 181.5 } },
+		},
+		Merge3 = Merge {
+			CtrlWZoom = false,
+			Inputs = {
+				Background = Input {
+					SourceOp = "DropShadow3",
+					Source = "Output",
+				},
+				Foreground = Input {
+					SourceOp = "Merge1",
+					Source = "Output",
+				},
+				PerformDepthMerge = Input { Value = 0, },
+			},
+			ViewInfo = OperatorInfo { Pos = { 770, 181.5 } },
+		},
+		Merge1 = Merge {
+			Inputs = {
+				Background = Input {
+					SourceOp = "DropShadow1",
+					Source = "Output",
+				},
+				Foreground = Input {
+					SourceOp = "DropShadow2",
+					Source = "Output",
+				},
+				Center = Input { Value = { 0.527027027027027, 0.65990990990991 }, },
+				Size = Input { Value = 1.25, },
+				PerformDepthMerge = Input { Value = 0, },
+			},
+			ViewInfo = OperatorInfo { Pos = { 770, 115.5 } },
+		},
+		Ellipse1 = EllipseMask {
+			Inputs = {
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 500, },
+				MaskHeight = Input { Value = 500, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				UseFrameFormatSettings = Input { Value = 1, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Width = Input {
+					SourceOp = "Ellipse1Width",
+					Source = "Value",
+				},
+				Height = Input {
+					Value = 0.866,
+					Expression = "Width",
+				},
+			},
+			ViewInfo = OperatorInfo { Pos = { 275, 181.5 } },
+		},
+		Ellipse1Width = BezierSpline {
+			SplineColor = { Red = 225, Green = 255, Blue = 0 },
+			CtrlWZoom = false,
+			KeyFrames = {
+				[0] = { 0, RH = { 10, 0 } },
+				[30] = { 0.866, LH = { 20, 0.866 } }
+			}
+		}
+	},
+	ActiveTool = "Merge3"
+}
